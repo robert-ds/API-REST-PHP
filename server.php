@@ -59,6 +59,15 @@ switch(strtoupper($_SERVER['REQUEST_METHOD'])){
     break;
 
   case 'POST':
+      // Resivimos el contenido del usuario en formato json
+      $json = file_get_contents('php://input');
+      
+      // Lo almacenamos en un array. como ejemplo. Lo ideal seria una DB.
+      $books[] = json_decode($json, true);
+
+      // Obtenemos el id del nuevo libo indresado
+      // echo array_keys($books)[count($books) -1];
+      echo json_encode($books);
     break;
 
   case 'PUT':
