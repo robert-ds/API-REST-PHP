@@ -86,6 +86,15 @@ switch(strtoupper($_SERVER['REQUEST_METHOD'])){
     break;
 
   case 'DELETE':
+    // Validamos que el recurso exista
+    if( !empty($resourceId) && array_key_exists($resourceId,$books)){
+      // Eliminamos el recurso
+      unset($books[$resourceId]);
+    }
+
+    // Retornamos la coleccion modificada en formato json, para comprobar que se ha eliminado un recurso
+    echo json_encode($books);
+
     break;
 
 }
