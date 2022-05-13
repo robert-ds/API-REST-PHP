@@ -67,10 +67,22 @@ switch(strtoupper($_SERVER['REQUEST_METHOD'])){
 
       // Obtenemos el id del nuevo libo indresado
       // echo array_keys($books)[count($books) -1];
+
+      // Emitimos hacia la salida la ultima clave del arreglo de libros
       echo json_encode($books);
     break;
 
   case 'PUT':
+    // Validamos que el recurso buscado exista
+    if( !empty($resourceId) && array_key_exists($resourceId,$books)){
+      $json = file_get_contents('php://input');
+
+      // comprobamos el libro por id para luego reemplazar
+      $books[$resourceId] = json_decode($json, true);
+
+      // Retornamos la coleccion modificada en formato json
+      echo json_encode($books);
+    }
     break;
 
   case 'DELETE':
