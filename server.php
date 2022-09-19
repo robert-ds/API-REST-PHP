@@ -1,32 +1,6 @@
 <?php
 
-if(!array_key_exists('HTTP_X_TOKEN', $_SERVER)){
-  die;
-}
-
-$url = 'http://localhost/8001';
-
-$ch = curl_init($url);
-
-curl_setopt(
-  $ch,
-  CURLOPT_HTTPHEADER,
-  [
-    "X-Token: {$_SERVER['HTTP_X_TOKEN']}",
-  ]
-  );
-
-curl_setopt(
-  $ch,
-  CURLOPT_RETURNTRANSFER,
-  true
-);
-
-$ret = curl_exec($ch);
-
-if($ret !== 'true'){
-  die;
-}
+header('Content-Type: application/json' );
 
 // Definimos los recursos disponibles
 $allowedResourceTypes = [
@@ -69,7 +43,6 @@ $books = [
 
 ];
 
-header('Content-Type: application/json');
 
 // Levantamos el id del recurso buscado
 $resourceId = array_key_exists('resource_id', $_GET) ? $_GET['resource_id'] : '' ;
